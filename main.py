@@ -1,35 +1,12 @@
 import time
 
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
-
 import telebot
 import config
 
-
-
-
-
-def find_books(req_str = ''):
-    # Открываем окружение, находим все нужные элементы с помощью webdriver
-    driver = webdriver.Chrome()
-    driver.get("http://85.88.171.2:8080/cgi-bin/irbis64r_plus/cgiirbis_64_ft.exe?C21COM=F&I21DBN=KRAJ_FULLTEXT&P21DBN=KRAJ&Z21ID=&S21CNR=5")
-    submit_button = driver.find_element_by_css_selector('[value="Войти как Гость"]')
-    submit_button.click()
-    print(submit_button)
-    select = Select(driver.find_element_by_css_selector("[name='I21DBN']"))
-    select.select_by_visible_text('Основной электронный каталог')
-    search = driver.find_element_by_css_selector("#SEARCH_STRING")
-    # Отправляем запрос
-    search.send_keys(req_str)
-    driver.find_element_by_name("C21COM1").click()
-    time.sleep(10)
-    driver.quit()
+import books_requests
     
 
 if __name__ == "__main__":
-
-
 # сам бот
     bot = telebot.TeleBot(config.TOKEN)
 
@@ -55,7 +32,7 @@ if __name__ == "__main__":
                 LISTEN = True
             elif LISTEN:
                 s = message.text
-                find_books(s)
+                books_requests.find_books_in_browser(s)
 
                 LISTEN = False
 
