@@ -6,12 +6,11 @@ from selenium.webdriver.support.ui import Select
 import telebot
 import config
 
-req_str = 'Властелин колец'
 
 
 
 
-def find_book(req_str):
+def find_books(req_str = ''):
     # Открываем окружение, находим все нужные элементы с помощью webdriver
     driver = webdriver.Chrome()
     driver.get("http://85.88.171.2:8080/cgi-bin/irbis64r_plus/cgiirbis_64_ft.exe?C21COM=F&I21DBN=KRAJ_FULLTEXT&P21DBN=KRAJ&Z21ID=&S21CNR=5")
@@ -56,7 +55,7 @@ if __name__ == "__main__":
                 LISTEN = True
             elif LISTEN:
                 s = message.text
-                books = find_books(s)
+                find_books(s)
 
                 LISTEN = False
 
@@ -67,12 +66,12 @@ if __name__ == "__main__":
 
             
 
-    # @bot.callback_query_handler(func=lambda call: True)
-    # def callback_inline(call):
-    #     try:
-    #         if call.message:
-    #             if call.data == 'find_book':
-    #                 bot.send_message(message.chat.id, 'Введите название книги')
+#     @bot.callback_query_handler(func=lambda call: True)
+#     def callback_inline(call):
+#         try:
+#             if call.message:
+#                 if call.data == 'find_book':
+#                     bot.send_message(message.chat.id, 'Введите название книги')
 
     
 
