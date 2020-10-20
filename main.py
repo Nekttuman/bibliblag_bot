@@ -3,8 +3,8 @@ import time
 import telebot
 import config
 
-import books_requests
-    
+import scrapper
+EventSrc = 'https://biblioblag.ru/mibs/plan-meropriyatij'
 
 if __name__ == "__main__":
 # сам бот
@@ -14,32 +14,28 @@ if __name__ == "__main__":
     def welcome(message):
         markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
         markup.add(telebot.types.KeyboardButton('Найти книгу'),
-                   telebot.types.KeyboardButton('Что нового в Чеховке?'))
+                   telebot.types.KeyboardButton('Узнать о мероприятиях'))
+        bot.send_message(message.chat.id, 'Вас приветствует кибер-Чехов! С помощьюю данного бота вы можете:\nа) проверить наличие книги в библиотеке и зарезервировать её на получение в определенный срок\nб) узнать о предстоящих мероприятиях и записаться на них',
+                            reply_markup=markup)
 
-        bot.send_message(message.chat.id, '''
-Вас приветствует кибер-Чехов! С помощьюю данного бота вы можете:
-а) проверить наличие книги в библиотеке и зарезервировать её на получение в определенный срок
-б) узнать о предстоящих мероприятиях и записаться на них
-        ''', reply_markup=markup)
 
-    LISTEN = False
+    BOOKFINDING = False   
     @bot.message_handler(content_types=['text'])
     def lol(message):
-        global LISTEN
-        if message.chat.type == 'private':
-            if message.text == 'Найти книгу':
-                bot.send_message(message.chat.id, 'Введите название книги и автора')
-                LISTEN = True
-            elif LISTEN:
-                s = message.text
-                books_requests.find_books_in_browser(s)
-
-                LISTEN = False
-
-
-
+        if message.text == 'Найти книгу':
+            bot.send_message(message.chat.id, 'Введите название книги и автора')
+            BOOKFINDING = True
+        elif BOOKFINDING:
+            # Следует написать проверку ввода
+            booksInfoMessage = scrapper.find_books(message.text)
+            bot.send_message(message.chat.id, booksInfoMessage)
+            BOOKFINDING = False
+        
+        if message.text == 'Узнать о мероприятиях':
             
-
+            bot.send_message(message.chat.id, 'dd')
+            
+ 
 
             
 
@@ -54,4 +50,5 @@ if __name__ == "__main__":
 
    
 #RUN
-bot.polling(none_stop=True)
+if __name__ == "__main__":
+    bot.polling(none_stop=True)
