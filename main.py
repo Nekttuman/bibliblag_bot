@@ -2,52 +2,44 @@ import time
 
 import telebot
 import config
-
+import msg
 import scrapper
-EventSrc = 'https://biblioblag.ru/mibs/plan-meropriyatij'
-
-if __name__ == "__main__":
-# сам бот
-    bot = telebot.TeleBot(config.TOKEN)
-
-    @bot.message_handler(commands = ['start'])
-    def welcome(message):
-        markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-        markup.add(telebot.types.KeyboardButton('Найти книгу'),
-                   telebot.types.KeyboardButton('Узнать о мероприятиях'))
-        bot.send_message(message.chat.id, 'Вас приветствует кибер-Чехов! С помощьюю данного бота вы можете:\nа) проверить наличие книги в библиотеке и зарезервировать её на получение в определенный срок\nб) узнать о предстоящих мероприятиях и записаться на них',
-                            reply_markup=markup)
 
 
-    BOOKFINDING = False   
-    @bot.message_handler(content_types=['text'])
-    def lol(message):
-        if message.text == 'Найти книгу':
-            bot.send_message(message.chat.id, 'Введите название книги и автора')
-            BOOKFINDING = True
-        elif BOOKFINDING:
-            # Следует написать проверку ввода
-            booksInfoMessage = scrapper.find_books(message.text)
-            bot.send_message(message.chat.id, booksInfoMessage)
-            BOOKFINDING = False
-        
-        if message.text == 'Узнать о мероприятиях':
-            
-            bot.send_message(message.chat.id, 'dd')
-            
+bot = telebot.TeleBot(config.TOKEN)
+
+@bot.message_handler(commands = ['start'])
+def welcome(message):
+    bot.send_message(message.chat.id, msg.start_message)
+          
  
+#BOOK FINDING
+get_book = False
+addition_info = False
+@bot.message_handler(commands =['find_book'])            
+def search_book(message):
+    bot.send_message(message.chat.id, msg.name_author_format, parse_mode='markdown')
+    global get_book
+    get_book = True
+    
+@bot.message_handler(content_types = ['text'])
+def get_book(message):
+    if get_book:
+        author, name = message.text.split(' - ')
+        scrapper.find_books(name + ' ' + author)
+    else:
+        bot.send_message(message.chat.id, msg.other_input)
+        
 
-            
 
-#     @bot.callback_query_handler(func=lambda call: True)
-#     def callback_inline(call):
-#         try:
-#             if call.message:
-#                 if call.data == 'find_book':
-#                     bot.send_message(message.chat.id, 'Введите название книги')
 
+
+@bot.message_handler(commands =['events'])
+def  events(message):
+    bot.send_message(message.chat.id, msg.start_message)
     
 
+    
    
 #RUN
 if __name__ == "__main__":

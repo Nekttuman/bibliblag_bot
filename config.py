@@ -14,3 +14,5 @@ posts = {
     'Комарова':     'komarova@biblioblag.ru',
     'Садовое':''
 }
+
+EventSrc = 'https://biblioblag.ru/mibs/plan-meropriyatij'

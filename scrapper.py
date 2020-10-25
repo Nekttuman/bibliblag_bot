@@ -5,9 +5,8 @@ from bs4 import BeautifulSoup
 import requests as req
 import datetime
 
-driver = webdriver.Chrome()
 
-class Book():
+class Book:
     def __init__(self, name='', author = '', available = False, where = ''):
         self.name = name
         self.author = author
@@ -47,20 +46,17 @@ def formate_message(books):
 
         return message
         
-def find_books(req_str = ''):
+def find_books(req_str):
         """get info about book and find it with browser"""
 # Открываем окружение, заходим на нужный раздел сайта с помощью webdriver
-       
         #http://85.88.171.2:8080/cgi-bin/irbis64r_plus/cgiirbis_64_ft.exe?C21COM=F&I21DBN=KRAJ_FULLTEXT&P21DBN=KRAJ&Z21ID=&S21CNR=5
         driver.get("http://192.168.10.169:8080/cgi-bin/irbis64r_plus/cgiirbis_64_ft.exe?C21COM=F&I21DBN=IBIS_FULLTEXT&P21DBN=IBIS&Z21ID=&S21CNR=5")
         submit_button = driver.find_element_by_css_selector('[value="Войти как Гость"]')
         submit_button.click()
-        print(submit_button)
         select = Select(driver.find_element_by_css_selector("[name='I21DBN']"))
         select.select_by_visible_text('Основной электронный каталог')
         search = driver.find_element_by_css_selector("#SEARCH_STRING")
         driver.find_element_by_css_selector("#ctrl_toggleExtendedSearchFields_text").click()
-
         select = Select(driver.find_element_by_name('A34_main'))
         select.select_by_visible_text('Книги в целом')
 # Отправляем запрос
@@ -107,6 +103,6 @@ def get_events(src = 'https://biblioblag.ru/mibs/plan-meropriyatij'):
                 n+=1
 
         events = sorted(events, key= lambda e: e.date)
-        
         return events
 
+driver = webdriver.Chrome()
