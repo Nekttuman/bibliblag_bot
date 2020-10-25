@@ -28,7 +28,7 @@ source = driver.page_source
 soup = BeautifulSoup(source, 'html.parser')
 tables = soup.find_all('table', attrs = {'style':'width:100%;border:1px;font-size:11px;'})
 for book in tables:
-    help(book)
+    print(book)
     book = book.text
     book = book[book.index('.') + 1:book.index('(в пер.)')]
     book = book[book.index('.') + 7:]

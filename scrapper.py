@@ -36,7 +36,9 @@ def get_books(source):
         books = []
 
         soup = BeautifulSoup(source, 'html.parser')
-                
+        tables = soup.findall('[style="width:100%;border:1px;font-size:11px;"]')
+
+
         return books
 
 def formate_message(books):
