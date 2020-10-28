@@ -3,48 +3,14 @@ import requests as req
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import datetime
+import config
+from scrapper import Scrapper
 
-req_str = 'сапковский ведьмак'
-driver = webdriver.Chrome()
+scr = Scrapper(config.BookFindServiceUrl)
+scr.find('Ведьмак')
+scr.get_all_book_describtions()
 
-
-driver.get("http://85.88.171.2:8080/cgi-bin/irbis64r_plus/cgiirbis_64_ft.exe?C21COM=F&I21DBN=KRAJ_FULLTEXT&P21DBN=KRAJ&Z21ID=&S21CNR=5")
-submit_button = driver.find_element_by_css_selector('[value="Войти как Гость"]')
-submit_button.click()
-select = Select(driver.find_element_by_css_selector("[name='I21DBN']"))
-select.select_by_visible_text('Основной электронный каталог')
-search = driver.find_element_by_css_selector("#SEARCH_STRING")
-driver.find_element_by_css_selector("#ctrl_toggleExtendedSearchFields_text").click()
-select = Select(driver.find_element_by_name('A34_main'))
-select.select_by_visible_text('Книги в целом')
-# Отправляем запрос
-search.send_keys(req_str)
-driver.find_element_by_name("C21COM1").click()
-
-source = driver.page_source
-# close
-#driver.quit()
-
-soup = BeautifulSoup(source, 'html.parser')
-tables = soup.find_all('table', attrs = {'style':'width:100%;border:1px;font-size:11px;'})
-for book in tables:
-    print(book)
-    book = book.text
-    book = book[book.index('.') + 1:book.index('(в пер.)')]
-    book = book[book.index('.') + 7:]
-    print(book)
-
-# поиск кнопки для перехода на следующую страницу
-portions = driver.find_elements_by_class_name('portion')
-END = False
-next = None
-for page in portions:
-    if page.text == 'Следующая':
-        END = False
-        next = page
-        break
-    else:
-        END = True
+scr.show_books()
 
 
 #     def __init__(self, date, name, place, describtion, category = ''):

@@ -16,3 +16,6 @@ posts = {
 }
 
 EventSrc = 'https://biblioblag.ru/mibs/plan-meropriyatij'
+
+BookFindServiceUrl = "http://192.168.10.169:8080/cgi-bin/irbis64r_plus/cgiirbis_64_ft.exe?C21COM=F&I21DBN=IBIS_FULLTEXT&P21DBN=IBIS&Z21ID=&S21CNR=5"
+BookFindServiceUrl_alt = "http://85.88.171.2:8080/cgi-bin/irbis64r_plus/cgiirbis_64_ft.exe?C21COM=F&I21DBN=KRAJ_FULLTEXT&P21DBN=KRAJ&Z21ID=&S21CNR=5"
