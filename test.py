@@ -6,12 +6,9 @@ import datetime
 import config
 from scrapper import Scrapper
 
+s = input()
 scr = Scrapper(config.BookFindServiceUrl)
-scr.find('Ведьмак')
-scr.get_all_book_describtions()
-
-scr.show_books()
-
+print(scr.find(s))
 
 #     def __init__(self, date, name, place, describtion, category = ''):
 #         self.date = date

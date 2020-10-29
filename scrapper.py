@@ -31,16 +31,25 @@ class Scrapper:
 
     # Отправляем запрос
     def find(self, req_str):
+        '''return bool value find/not find, init self.source, init self.source with first page source'''
         driver = self.driver
         search = driver.find_element_by_css_selector("#SEARCH_STRING")
         driver.find_element_by_css_selector(
             "#ctrl_toggleExtendedSearchFields_text").click()
         select = Select(driver.find_element_by_name('A34_main'))
         select.select_by_visible_text('Книги в целом')
-
         search.send_keys(req_str)
         driver.find_element_by_name("C21COM1").click()
-        self.source = driver.page_source
+        # проверка наличия книги
+        try:
+            notFound = driver.find_element_by_css_selector('td[colspan="4"]')
+        except ValueError:
+            pass  
+        if notFound.text[:48] == 'Нет результатов для данного запроса. Попробуйте:':
+            return 0
+        else:
+            self.driver = driver.page_source
+            return 1
 
     def get_all_books(self):
         def get_books_desc_from_page(source):
@@ -53,7 +62,8 @@ class Scrapper:
                 note = note[note.index('.') + 7:]
             # нужен скраппер доступных мест
                 self.books.append(Book(note))
-
+        def get_available_points_from_page(source):
+            pass
         driver = self.driver
         curr_source = self.source
         END = False
