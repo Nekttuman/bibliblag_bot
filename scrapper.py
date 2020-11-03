@@ -8,12 +8,21 @@ import datetime
 
 class Book:
     def __init__(self, describtion, where_available=''):
-        self.describtion = describtion
-        self.where_available = where_available
+        assert isinstance(describtion, str)
+        assert isinstance(where_available, str)
+
+        self.describtion = self.prepare(describtion)
+        self.where_available = self.prepare(where_available)
+
+    def prepare(self, st):
+        while '  ' in st:
+            st = st.replace('  ', '')
+        if '(1)' in st:
+            st = st.replace('(1)', '')
+        return st
 
     def show(self):
         print(self.describtion, self.where_available, sep='\n', end='\n\n')
-
 
 class Scrapper:
     driver = webdriver.Chrome()
@@ -31,7 +40,7 @@ class Scrapper:
 
     # Отправляем запрос
     def find(self, req_str):
-        '''return bool value find/not find, init self.source, init self.source with first page source'''
+        '''return bool value find/not find, init self.source with first page source'''
         driver = self.driver
         search = driver.find_element_by_css_selector("#SEARCH_STRING")
         driver.find_element_by_css_selector(
@@ -48,35 +57,44 @@ class Scrapper:
         if notFound.text[:48] == 'Нет результатов для данного запроса. Попробуйте:':
             return 0
         else:
-            self.driver = driver.page_source
+            self.source = driver.page_source
             return 1
 
     def get_all_books(self):
         def get_books_desc_from_page(source):
             soup = BeautifulSoup(source, 'html.parser')
-            tables = soup.find_all(
-                'table', attrs={'style': 'width:100%;border:1px;font-size:11px;'})
+            tables = soup.find_all('table', attrs={'style': 'width:100%;border:1px;font-size:11px;'})
             for note in tables:
                 note = note.text
-                note = note[note.index('.') + 1:note.index('ISBN')+22]
+                places = ''
+                if 'Свободны' in note:
+                    places = note[note.index('Свободны')+10:].split(', ')
+                
+                if 'ISBN' in note:
+                    note = note[note.index('.') + 1:note.index('ISBN')+22]
+                elif 'экз.' in note:
+                    note = note[note.index('.') + 1:note.index('экз.')+4]
+                    
                 note = note[note.index('.') + 7:]
-            # нужен скраппер доступных мест
-                self.books.append(Book(note))
-        def get_available_points_from_page(source):
-            pass
+                for pls in places:
+                    self.books.append(Book(note, pls))
+
         driver = self.driver
         curr_source = self.source
         END = False
-        get_books_desc_from_page(curr_source)  # с первой страницы
-        while not END:
+        get_books_desc_from_page(curr_source)  # берем инфу с первой страницы
+        while not END:                         # здесь со всех последующих
             # поиск кнопки для перехода на следующую страницу
             portions = driver.find_elements_by_class_name('portion')
-            for page in portions:
-                if page.text == 'Следующая':
-                    END = False
-                    page.click()
-                    curr_source = driver.page_source
-                    break
+            if len(portions) != 0:
+                for navElem in portions:
+                    if navElem.text == 'Следующая':
+                        END = False
+                        navElem.click()
+                        curr_source = driver.page_source
+                        break
+                    else:
+                        END = True
             else:
                 END = True
             get_books_desc_from_page(curr_source)

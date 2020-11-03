@@ -6,10 +6,26 @@ import datetime
 import config
 from scrapper import Scrapper
 
-s = input()
-scr = Scrapper(config.BookFindServiceUrl)
-print(scr.find(s))
+# driver = webdriver.Chrome()
+# driver.get(config.BookFindServiceUrl_alt)
+# driver.find_element_by_link_text('Экземпляры').click()
 
+
+
+s = 'ведьмак последнее желание'#input()
+scr = Scrapper(config.BookFindServiceUrl)
+scr.find(s)
+scr.get_all_books()
+#scr.show_books()
+print(scr.books[0].describtion)
+scr.close()
+
+
+
+
+
+
+#scr.close()
 #     def __init__(self, date, name, place, describtion, category = ''):
 #         self.date = date
 #         self.name = name
