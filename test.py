@@ -1,32 +1,23 @@
 from bs4 import BeautifulSoup
 import requests as req
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
 import datetime
 import config
 from scrapper import Scrapper
-
-# driver = webdriver.Chrome()
-# driver.get(config.BookFindServiceUrl_alt)
-# driver.find_element_by_link_text('Экземпляры').click()
+import scrapper
 
 
 
-s = 'ведьмак последнее желание'#input()
-scr = Scrapper(config.BookFindServiceUrl)
+
+s = 'ведьмак меч предназначения'#input()
+scr = Scrapper(config.BookFindServiceUrl_alt)
 scr.find(s)
-scr.get_all_books()
-#scr.show_books()
-print(scr.books[0].describtion)
+scr.show_books()
+
 scr.close()
 
 
-
-
-
-
-#scr.close()
-#     def __init__(self, date, name, place, describtion, category = ''):
+# class Event:
+#     def __init__(self, date, name, place, describtion, category):
 #         self.date = date
 #         self.name = name
 #         self.place = place
@@ -42,13 +33,18 @@ scr.close()
 # Подробнее: {3}'''.format(self.name, self.date, self.place, self.describtion, self.category)
 #         return s
 
+#     def show(self):
+#         print(self.make_message_str())
+
+
 
 # resp = req.get("https://biblioblag.ru/mibs/plan-meropriyatij")
- 
 # soup = BeautifulSoup(resp.text, 'html.parser')
-# table = soup.tbody
 
-# records = soup.find_all('tr')
+# records = soup.find_all('body')
+
+# print(records)
+
 # events = []
 # for rec in records[1:]:
 #     cel = rec.find_all('td')

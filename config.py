@@ -1,4 +1,5 @@
-TOKEN = '1208319729:AAFxAJ2jTTuOKdV7fxiYTr0w3pXfNu3EzJY'
+U_BOT_TOKEN = '1208319729:AAFxAJ2jTTuOKdV7fxiYTr0w3pXfNu3EzJY'
+E_BOT_TOKEN = '1423094511:AAFE4kIGHjtCRGEnQMU2W9fiis9zxDmSvNs'
 
 posts = {
     'центральная':  'centralnaya@biblioblag.ru',
@@ -19,3 +20,17 @@ EventSrc = 'https://biblioblag.ru/mibs/plan-meropriyatij'
 
 BookFindServiceUrl = "http://192.168.10.169:8080/cgi-bin/irbis64r_plus/cgiirbis_64_ft.exe?C21COM=F&I21DBN=IBIS_FULLTEXT&P21DBN=IBIS&Z21ID=&S21CNR=5"
 BookFindServiceUrl_alt = "http://85.88.171.2:8080/cgi-bin/irbis64r_plus/cgiirbis_64_ft.exe?C21COM=F&I21DBN=KRAJ_FULLTEXT&P21DBN=KRAJ&Z21ID=&S21CNR=5"
+
+lib_tokens = {
+    'central3232': 'центральная',
+    'sadov098345':'садовое',
+    'dialog54345679':'диалог',
+    'komar55523947':'комарова',
+    'plodop7281':'плодопитомник',
+    'belogor093838':'белогорье',
+    'mashuka23999995':'машука',
+    'dom_sem674943':'дом семьи',
+    'baguln4567987':'багульник',
+    'iskusstv740238':'искусств',
+    'solnechn623738':'солнечная'
+}
