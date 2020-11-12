@@ -94,3 +94,10 @@ user_id библиотекаря, его имя, библиотека в кот�
     name
     library
     mute
+
+
+Опросы
+poll = telebot.types.Poll(question = …)
+poll.add(answer1)
+poll.add(answer2)
+bot.send_poll(chat_id = …, poll = poll, reply_markup = …)
