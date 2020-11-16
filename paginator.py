@@ -13,12 +13,12 @@ class Paginator:
 
     def __init__(self, data_list, msg_chat_id,  split=3, final_tip='', start_tip='', msg_max_len = 1000):
         self.split = split
+        self.MSG_MAX_LEN = msg_max_len
         self.__divide(data_list)
         self.start_tip = start_tip
         self.chat_id = msg_chat_id
         self.final_tip = final_tip
         self.__generate_btns(split)
-        self.MSG_MAX_LEN = msg_max_len
 
     def add_to_data(self, additional_data):
         self.__divide(additional_data)
@@ -98,8 +98,8 @@ class Paginator:
         assert len(custom_button_names) == len(callback_datas)
 
         markup = types.InlineKeyboardMarkup()
-        msg = ''
-
+        msg = 'жужа'
+        print(self.data_pages_list[self.__curr_page_num][num-1])
         return (msg, markup)
 
     def clear_data(self):
@@ -114,7 +114,7 @@ class Paginator:
             size += len(i)
         size += len(item)
         return size > self.MSG_MAX_LEN
-
+                     
     def __divide(self, data):
         p = 0
         page = []
