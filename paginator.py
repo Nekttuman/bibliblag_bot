@@ -2,21 +2,22 @@ from telebot import types
 
 
 class Paginator:
+    '''Изсписка с данными делает нарезку на страницы и кнопки к ним'''
     __curr_page_num = 0
     __btn = {
-        'next': types.InlineKeyboardButton('>', callback_data='next'),
-        'prev': types.InlineKeyboardButton('<', callback_data='previous'),
+        'next': types.InlineKeyboardButton('далее', callback_data='next'),
+        'prev': types.InlineKeyboardButton('назад', callback_data='previous'),
         'empty': types.InlineKeyboardButton(' ', callback_data='no')}
     __digit_stikers = ['0️⃣', '1️⃣', '2️⃣',
                        '3️⃣', '4️⃣', '5️⃣', '7️⃣', '8️⃣', '9️⃣']
     data_pages_list = []
 
-    def __init__(self, data_list, msg_chat_id,  split=3, final_tip='', start_tip='', msg_max_len = 1000):
+    def __init__(self, data_list, split=3, final_tip='', start_tip='', msg_max_len = 1000):
         self.split = split
         self.MSG_MAX_LEN = msg_max_len
+        self.data_pages_list = []
         self.__divide(data_list)
         self.start_tip = start_tip
-        self.chat_id = msg_chat_id
         self.final_tip = final_tip
         self.__generate_btns(split)
 
@@ -28,13 +29,14 @@ class Paginator:
         this method send first page with buttons of all items and button next, 
         if all content does not fit
         '''
+        self.__curr_page_num = 0
         msg = self.start_tip
         markup = types.InlineKeyboardMarkup(row_width=5)
         pointer = 0
         if len(self.data_pages_list) > 1:
             markup.add(self.__btn['next'])
         btn_row = []
-        for item in self.data_pages_list[0]:
+        for item in self.data_pages_list[self.__curr_page_num]:
             msg += self.__digit_stikers[pointer+1] + ' ' + item + '\n'
             btn_row.append(self.__btn[pointer+1])
             pointer += 1
@@ -82,11 +84,9 @@ class Paginator:
         markup.add(*btn_row)
         msg += '\n' + self.final_tip
 
-        # bot.edit_message_text(chat_id=self.chat_id,
-        #   message_id=msg_id, text=msg, reply_markup=markup)
         return (msg, markup)
 
-    def make_only(self, num, custom_button_names=[], callback_datas=[]):
+    def make_one(self, num, custom_button_names=[], callbacks_data=[]):
         '''
         this method change message text to describtion of one item and change markup to: 
         1) button with text 'back' 
@@ -94,16 +94,25 @@ class Paginator:
            and callback_data from ! list ! callback_datas
         '''
         assert isinstance(custom_button_names, list)
-        assert isinstance(callback_datas, list)
-        assert len(custom_button_names) == len(callback_datas)
+        assert isinstance(callbacks_data, list)
+        assert len(custom_button_names) == len(callbacks_data)
 
+    
         markup = types.InlineKeyboardMarkup()
-        msg = 'жужа'
-        print(self.data_pages_list[self.__curr_page_num][num-1])
+        for i in range(len(custom_button_names)):
+            markup.add(types.InlineKeyboardButton(custom_button_names[i], callback_data=callbacks_data[i]))
+
+        msg = self.data_pages_list[self.__curr_page_num][num]
+
         return (msg, markup)
+
+    def get_item(self, num):
+        assert isinstance(num, int)
+        return self.data_pages_list[self.__curr_page_num][num]
 
     def clear_data(self):
         self.data_pages_list = []
+        self.__curr_page_num = 0
 
     def __overlen(self, lst, item):
         '''

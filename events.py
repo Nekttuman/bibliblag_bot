@@ -1,8 +1,9 @@
-
 import datetime
 import requests as req
 from bs4 import BeautifulSoup
 import config
+
+"""предоставляет список мероприятий events, обновляет его каждый день"""
 
 last_update =  datetime.date(2020, 11, 2)
 
@@ -41,8 +42,8 @@ if last_update < datetime.date.today():
         except ValueError:
             date = date[1:]
             date = datetime.date(2020, int(date[3:5]), int(date[:2]))
-        if date < datetime.date(2020, 10, 11):
-            continue
+        # if date < datetime.date(2020, 10, 11):
+        #     continue
         place = cel[2].text[1:-1]
         desc = cel[3].text[1:-1]
         category = cel[1].find('strong').text
