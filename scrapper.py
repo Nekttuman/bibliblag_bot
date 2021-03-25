@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 import requests as req
+from browser_control import browser_instance
+import time
 
 '''Этот модуль скраппит книги и их содерживмое со страницы, передаваемой в параметры при создании объекта класса Scrapper'''
 
@@ -39,10 +41,11 @@ class Book:
     #     print(self.describtion, *self.libraries, sep='\n', end='\n\n')
 
     def to_str(self):
-        string = self.describtion + '\n' + 'Библиотеки:' + '\n'
+        string = self.describtion + '\n' + 'В наличии в:' + '\n'
         for lib in self.libraries:
             string += '🔸' + lib + '\n'
         return string
+
 
 
 class Scrapper:
@@ -54,10 +57,11 @@ class Scrapper:
     events = []
     source = ''
     num_books = 0
+    
 
-    def __init__(self, book_url):
+    def __init__(self, book_url, user_id, msg_id):
         '''Инициализация вебдрайвера и переход к нужной для поиска странице; выбор настроек поиска'''
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome('chromedriver\chromedriver.exe')
         self.driver.get(book_url)
         submit_button = self.driver.find_element_by_css_selector(
             '[value="Войти как Гость"]')
@@ -69,6 +73,8 @@ class Scrapper:
             '#ctrl_toggleExtendedSearchFields_text').click()
         select = Select(self.driver.find_element_by_name('A34_main'))
         select.select_by_visible_text('Книги в целом')
+        self.__user_id = user_id
+        browser_instance[user_id] = [msg_id, time.time()]
 
     def find_books(self, req_str):
         '''return Book[], init self.source with first page source'''
@@ -125,6 +131,10 @@ class Scrapper:
 
     def __del__(self):
         self.driver.close()
+        del browser_instance[self.__user_id]
+        print('bye')
     
     def close(self):
         self.driver.close()
+        del browser_instance[self.__user_id]
+        

@@ -1,0 +1,10 @@
+2021-01-12 at 18:15:31 DEBUG 993803709 : user take welcome message
+2021-01-12 at 18:16:35 DEBUG 993803709 : user take welcome message
+2021-01-12 at 18:31:15 DEBUG user[993803709] : take help message
+2021-01-12 at 18:31:40 DEBUG user[993803709] : take help message
+2021-01-12 at 18:36:39 DEBUG user[993803709] : take requests list
+2021-01-12 at 18:36:48 DEBUG user[993803709] : open one item in list
+2021-01-12 at 18:36:53 DEBUG user[993803709] : - answer to request number 40
+2021-01-12 at 18:36:56 DEBUG user[993803709] : del query number 40
+2021-01-12 at 18:36:59 DEBUG user[993803709] : take requests list
+2021-01-12 at 18:37:04 DEBUG user[993803709] : take help message

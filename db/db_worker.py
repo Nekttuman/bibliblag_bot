@@ -5,7 +5,7 @@ import time
 # db = sqlite3.connect("db/libra.db")
 # c = db.cursor()
 
-# c.execute("DROP TABLE requests")
+# # c.execute("DROP TABLE requests")
 
 # c.execute('''CREATE TABLE IF NOT EXISTS requests(
 #     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -69,16 +69,23 @@ class db_worker:
         assert isinstance(chat_id, int)
         assert isinstance(book_name, str)
         date = datetime.datetime.now()
-        self.__cursor.execute("INSERT INTO requests (chat_id, book_name, library, date) VALUES (?,?,?,?)",
-                              (chat_id, book_name, library, date))
+        self.__cursor.execute("INSERT INTO requests (chat_id, book_name, library, date, status, response) VALUES (?,?,?,?,?,?)",
+                              (chat_id, book_name, library, date, 'обрабатывается', 'нет ответа'))
         self.__conn.commit()
+        self.__cursor.execute("SELECT id FROM requests WHERE book_name = ? ORDER BY date DESC LIMIT 1 ", (book_name,))
+        return self.__cursor.fetchall()[0][0]
+
+    def get_request_by_id(self,request_id):
+        self.__cursor.execute(
+            "SELECT * FROM requests WHERE id = ?", (request_id,))
+        return self.__cursor.fetchall()[0]
 
     def remove_request(self, request_id):
         assert isinstance(request_id, int)
         self.__cursor.execute("DELETE FROM requests WHERE id = ?", (request_id,))
         self.__conn.commit()
 
-    def get_requests(self, chat_id):
+    def get_requests_for_librarian(self, chat_id):
         assert isinstance(chat_id, int)
         self.__cursor.execute(
             "SELECT library FROM librarians WHERE chat_id = ?", (chat_id,))
@@ -91,6 +98,19 @@ class db_worker:
         assert isinstance(request_id, int)
         self.__cursor.execute("UPDATE requests SET response = ? WHERE id = ?", (response, request_id))
         self.__conn.commit()
+
+    def get_reserved_books_for_librarian(self, chat_id):
+        self.__cursor.execute(
+            "SELECT library FROM librarians WHERE chat_id = ?", (chat_id,))
+        library = self.__cursor.fetchone()[0]
+        self.__cursor.execute(
+            "SELECT * FROM requests WHERE status = ? AND library = ?", ('зарезервировано', library))
+        return self.__cursor.fetchall()
+
+    def get_reserved_books_for_reader(self, chat_id):
+        self.__cursor.execute(
+            "SELECT * FROM requests WHERE status = ? AND chat_id = ?", ('зарезервировано', chat_id))
+        return self.__cursor.fetchall()
 
 ############################################################################# libr
     def check_librarian(self, chat_id):
@@ -127,10 +147,15 @@ class db_worker:
         self.__cursor.execute("SELECT * FROM librarians")
         return self.__cursor.fetchall()
 
+    def get_all_unmute_librarians_id_from_one_lib(self, libname):
+        self.__cursor.execute("SELECT chat_id FROM librarians WHERE library = ? AND mute = 0", (libname,))
+        out = [int(i[0]) for i in self.__cursor.fetchall()]
+        return out
+
     def close(self):
         self.__conn.close()
 
-# db = db_worker('db/libra.db')
+db = db_worker('db/libra.db')
 # print(db.get_reader_state(123))
 # db.set_reader_state(123, 'ALOHA')
 # print(db.get_reader_state(123))
@@ -138,10 +163,13 @@ class db_worker:
 # print(db.get_reader_state(123))
 # db.remove_reader(123)
 # print(db.show_all_requests())
-# print(db.show_all_librarians())
+# print(db.get_all_librarians())
 # db.remove_librarian(993803709)
-# print(db.show_all_librarians())
+# print(db.get_all_librarians())
 # print(db.check_librarian(3))
-# db.add_request(132, 'Вася пупкин', 'Пощечина общественному вкусу', 'дом семьи')
-# db.add_response('кабачок', 2)
+# print(db.add_request(132, 'Пощечина общественному вкусу', 'дом семьи'))
+# # db.add_response('кабачок', 2)
 # print(*db.get_all_requests(), sep = '\n')
+# res = db.get_reques_by_id(1)
+# print(type(res))
+# print(db.get_all_librarians_id_from_one_lib('центральная'))

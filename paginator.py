@@ -2,7 +2,7 @@ from telebot import types
 
 
 class Paginator:
-    '''Изсписка с данными делает нарезку на страницы и кнопки к ним'''
+    '''Из списка с данными делает нарезку на страницы и кнопки к ним'''
     __curr_page_num = 0
     __btn = {
         'next': types.InlineKeyboardButton('далее', callback_data='next'),

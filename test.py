@@ -3,28 +3,13 @@ import datetime
 import config
 from scrapper import Scrapper
 import scrapper
+from loguru import logger 
 
-##################################################################
-# тесты времени получения книг с первой страницы
-#
-#
-# str_ex = ['колобок','пушкин онегин','блок','набоков лолита','бред','вдамвамлоиф','вампиры','дней до моего самоубийства',
-#             'платонов чевенгур','жизнь волка','ведьмак меч предназначения']
+logger.add("logs/debug.log", format="{time:YYYY-MM-DD at HH:mm:ss} {level} {message}", level="DEBUG", rotation="100 MB", compression="zip", backtrace=True, diagnose=True)
 
-# times = []
+logger.debug("hello, {user}!", user = 'hell')
 
-# for s in str_ex:
-#     t = time.time()
-#     scr = Scrapper(config.BookFindServiceUrl)
-#     scr.find_books(s)
-#     del scr
-#     times.append(time.time()-t)
+def f(a):
+    return 1/a
 
-# print("min: ", min(times))
-# print("max: ", max(times))
-# print("mean: ", sum(times)/len(times), "\n")
-
-# for i in range(len(times)):
-#     print(str_ex[i], times[i], sep='  .....  ')
-#
-####################################################################
+f(0)

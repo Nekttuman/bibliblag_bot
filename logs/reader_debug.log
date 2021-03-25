@@ -1,0 +1,101 @@
+2021-01-15 at 17:02:08 DEBUG 993803709 : welcome message
+2021-01-15 at 17:02:12 DEBUG 993803709 : start book finding
+2021-01-15 at 17:02:39 DEBUG 993803709 : get firs pagination page
+2021-01-15 at 17:02:56 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:03:30 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:03:35 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:03:39 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:03:44 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:03:46 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:03:49 DEBUG 993803709 : update books list
+2021-01-15 at 17:03:53 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:04:10 DEBUG 993803709 : change markup to libraries buttons
+2021-01-15 at 17:04:23 DEBUG 993803709 : send request n 42 to mashuk librarian
+2021-01-15 at 17:05:05 DEBUG 993803709 : update books list
+2021-01-15 at 17:09:54 DEBUG 993803709 : start book finding
+2021-01-15 at 17:10:12 DEBUG 993803709 : get firs pagination page
+2021-01-15 at 17:12:18 DEBUG 993803709 : get firs pagination page
+2021-01-15 at 17:27:06 DEBUG 993803709 : start book finding
+2021-01-15 at 17:27:22 DEBUG 993803709 : get first pagination page
+2021-01-15 at 17:27:28 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:27:34 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:27:37 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:27:41 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:27:45 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:27:48 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:27:52 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:27:55 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:01 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:05 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:08 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:12 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:15 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:18 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:20 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:22 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:23 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:26 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:28:27 DEBUG 993803709 : get previous pagination page
+2021-01-15 at 17:29:09 DEBUG 993803709 : start book finding
+2021-01-15 at 17:29:25 DEBUG 993803709 : get first pagination page
+2021-01-15 at 17:29:31 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:29:33 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:29:36 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:29:40 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:29:44 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:29:48 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:29:53 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:29:57 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:02 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:06 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:21 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:24 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:27 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:29 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:31 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:33 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:34 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:36 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:30:38 DEBUG 993803709 : get previous pagination page
+2021-01-15 at 17:31:13 DEBUG 993803709 : start book finding
+2021-01-15 at 17:32:44 DEBUG 993803709 : get first pagination page
+2021-01-15 at 17:37:06 DEBUG 993803709 : start book finding
+2021-01-15 at 17:37:22 DEBUG 993803709 : get first pagination page
+2021-01-15 at 17:38:35 DEBUG 993803709 : start book finding
+2021-01-15 at 17:38:48 DEBUG 993803709 : get first pagination page
+2021-01-15 at 17:38:56 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:38:58 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:12 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:18 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:22 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:26 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:27 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:30 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:34 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:40 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:43 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:46 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:49 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:51 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:53 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:57 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:39:59 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:40:18 DEBUG 993803709 : get next pagination page
+2021-01-15 at 17:40:20 DEBUG 993803709 : get previous pagination page
+2021-01-15 at 17:48:10 DEBUG 993803709 : start book finding
+2021-01-15 at 17:48:25 DEBUG 993803709 : get first pagination page
+2021-01-15 at 17:49:30 DEBUG 993803709 : start book finding
+2021-01-15 at 17:49:42 DEBUG 993803709 : get first pagination page
+2021-01-15 at 18:17:15 DEBUG 993803709 : start book finding
+2021-01-15 at 18:17:24 DEBUG 993803709 : get first pagination page
+2021-01-15 at 18:38:13 DEBUG 993803709 : start book finding
+2021-01-15 at 18:38:13 DEBUG 993803709 : start book finding
+2021-01-15 at 18:38:13 DEBUG 993803709 : start book finding
+2021-01-15 at 18:38:14 DEBUG 993803709 : start book finding
+2021-01-15 at 18:38:33 DEBUG 993803709 : get first pagination page
+2021-01-15 at 18:39:52 DEBUG 993803709 : start book finding
+2021-01-15 at 18:40:06 DEBUG 993803709 : get first pagination page
+2021-01-15 at 18:41:20 DEBUG 993803709 : start book finding
+2021-01-15 at 18:41:32 DEBUG 993803709 : get first pagination page
+2021-01-15 at 18:42:30 DEBUG 993803709 : start book finding
+2021-01-15 at 18:42:42 DEBUG 993803709 : get first pagination page
